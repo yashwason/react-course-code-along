@@ -1,72 +1,41 @@
 import React, { Component } from 'react';
-import Person from './Person/Person';
 import './App.css';
+import UserOutput from './UserOutput/UserOutput';
+import UserInput from './UserInput/UserInput';
 
 class App extends Component{
     state = {
-        persons: [
-            { name: `Shaan`, age: 15 },
-            { name: `Sat`, age: 42 },
-            { name: `Usha`, age: 44 }
-        ]
-    }
+        username: `yashwason`,
+        commonParaText: `This is a paragraph`
+    };
 
-    switchNameHandler = (name) => {
+    inputChangeHandler = (e) => {
         this.setState({
-            persons: [
-                { name: name, age: 15 },
-                { name: `Sat`, age: 42 },
-                { name: `Usha`, age: 44 }
-            ]
+            username: e.target.value
         });
-    }
-
-    onChangeHandler = (e) => {
-        this.setState({
-            persons: [
-                { name: e.target.value, age: 15 },
-                { name: `Sat`, age: 42 },
-                { name: `Usha`, age: 44 }
-            ]
-        })
-    }
+    };
 
     render = () => {
         return <div className="App">
-            <h1>Yash's First React Code</h1>
-            <p>This is a paragraph written in JSX</p>
+            <UserInput
+             value={ this.state.username }
+             inputChangeHandler={ this.inputChangeHandler }
+            />
 
-            <button
-             style={{
-                padding: `10px`,
-                borderRadius: `3px`,
-                border: `1px solid #f00`,
-                fontWeight: 600,
-                color: `#f00`,
-                background: `#000`
-             }}
-             onClick={() => this.switchNameHandler(`Yash`)}>
-                 Switch Names
-            </button>
-
-            <Person
-             name={ this.state.persons[0].name }
-             age={ this.state.persons[0].age }
-             onChangeHandler={ this.onChangeHandler }
-             />
-
-            <Person
-             name={ this.state.persons[1].name } 
-             age={ this.state.persons[1].age }
-             />
-
-            <Person
-             name={ this.state.persons[2].name } 
-             age={ this.state.persons[2].age }>
-                 I love Indian curry!
-             </Person>
+            <UserOutput
+             username={ this.state.username }
+             secondParaText={ this.state.commonParaText }
+            />
+            <UserOutput
+             username={ this.state.username }
+             secondParaText={ this.state.commonParaText }
+            />
+            <UserOutput
+             username={ this.state.username }
+             secondParaText={ this.state.commonParaText }
+            />
         </div>
-    }
+    };
 }
 
 

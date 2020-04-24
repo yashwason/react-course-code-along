@@ -1,0 +1,15 @@
+.UserOutput{
+    border: 1px solid #000;
+    border-radius: 5px;
+    max-width: 500px;
+    width: 40%;
+    margin: 30px auto;
+    background: #e7e7e7;
+    padding: 30px;
+}
+
+p.username{
+    font-weight: 600;
+    font-size: 20px;
+    margin-bottom: 0;
+}
