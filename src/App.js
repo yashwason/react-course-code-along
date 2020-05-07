@@ -5,9 +5,9 @@ import './App.css';
 class App extends Component{
     state = {
         persons: [
-            { name: `Shaan`, age: 15 },
-            { name: `Sat`, age: 42 },
-            { name: `Usha`, age: 44 }
+            { id: `a9s87d`, name: `Shaan`, age: 15 },
+            { id: `8as9d2`, name: `Sat`, age: 42 },
+            { id: `as54ds`, name: `Usha`, age: 44 }
         ],
         showPersons: false
     }
@@ -26,14 +26,18 @@ class App extends Component{
         this.setState({ showPersons: !this.state.showPersons });
     }
 
-    onChangeHandler = (e) => {
-        this.setState({
-            persons: [
-                { name: e.target.value, age: 15 },
-                { name: `Sat`, age: 42 },
-                { name: `Usha`, age: 44 }
-            ]
-        })
+    changeNameHandler = (name, id) => {
+        const persons = [ ...this.state.persons ];
+        const concernedPersonIdex = persons.findIndex((person) => person.id === id);
+        persons[concernedPersonIdex].name = name;
+        this.setState({ persons });
+    }
+
+    removeComponentHandler = (id) => {
+        const persons = [ ...this.state.persons ];
+        const concernedPersonIdex = persons.findIndex((person) => person.id === id);
+        persons.splice(concernedPersonIdex, 1);
+        this.setState({ persons });
     }
 
     render = () => {
@@ -41,20 +45,14 @@ class App extends Component{
         if(this.state.showPersons){
             persons = (
                 <div>
-                    <Person
-                        name={ this.state.persons[0].name }
-                        age={ this.state.persons[0].age }
-                        onChangeHandler={ this.onChangeHandler }/>
-        
-                    <Person
-                        name={ this.state.persons[1].name } 
-                        age={ this.state.persons[1].age }/>
-        
-                    <Person
-                        name={ this.state.persons[2].name } 
-                        age={ this.state.persons[2].age }>
-                            I love Indian curry!
-                    </Person>
+                    { this.state.persons.map((person) => {
+                        return <Person
+                        name={ person.name }
+                        age={ person.age }
+                        key={ person.id }
+                        changeNameHandler={ (e) => { this.changeNameHandler(e.target.value, person.id) } }
+                        removeComponentHandler={ () => { this.removeComponentHandler(person.id) } }/>
+                    }) }
                 </div>
             );
         }
