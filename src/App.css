@@ -2,13 +2,10 @@
   text-align: center;
 }
 
-button{
-    padding: 10px;
-    border-radius: 3px;
-    border: 1px solid #f00;
-    font-weight: 600;
-    font-size: 1.2em;
-    margin: 20px;
+.red{
     color: #f00;
-    background: #000;
+}
+
+.bold{
+    font-weight: bold;
 }

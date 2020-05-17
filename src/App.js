@@ -41,6 +41,17 @@ class App extends Component{
     }
 
     render = () => {
+        const buttonStyle = {
+            padding: `10px`,
+            borderRadius: `3px`,
+            border: `1px solid #f00`,
+            fontWeight: 600,
+            fontSize: `1.2em`,
+            margin: `20px`,
+            color: `#fff`,
+            background: `rgb(10, 156, 10)`
+        };
+        
         let persons = null;
         if(this.state.showPersons){
             persons = (
@@ -55,14 +66,24 @@ class App extends Component{
                     }) }
                 </div>
             );
+
+            buttonStyle.background = `#f00`;
+        }
+
+        const classList = [];
+        if(this.state.persons.length <= 1){
+            classList.push(`bold`);
+        }
+        if(this.state.persons.length <= 2){
+            classList.push(`red`);
         }
 
         return <div className="App">
             <h1>Yash's First React Code</h1>
-            <p>This is a paragraph written in JSX</p>
+            <p className={ classList.join(` `) }>This is a paragraph written in JSX</p>
 
-            <button onClick={() => this.switchNameHandler(`Yash`)}>Switch Names</button>
-            <button onClick={ this.togglePersonsHandler }>Toggle Persons</button>
+            <button style={ buttonStyle } onClick={() => this.switchNameHandler(`Yash`)}>Switch Names</button>
+            <button style={ buttonStyle } onClick={ this.togglePersonsHandler }>Toggle Persons</button>
 
             { persons }
         </div>
