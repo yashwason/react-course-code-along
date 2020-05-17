@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Radium, { StyleRoot } from 'radium';
+
 import Person from './Person/Person';
 import './App.css';
 
@@ -49,7 +51,12 @@ class App extends Component{
             fontSize: `1.2em`,
             margin: `20px`,
             color: `#fff`,
-            background: `rgb(10, 156, 10)`
+            background: `rgb(10, 156, 10)`,
+            transition: `all 0.25s`,
+            ':hover': {
+                background: `rgb(30, 185, 30)`,
+                transform: `scale(1.05)`
+            }
         };
         
         let persons = null;
@@ -68,6 +75,10 @@ class App extends Component{
             );
 
             buttonStyle.background = `#f00`;
+            buttonStyle[':hover'] = {
+                ...buttonStyle[':hover'],
+                background: `salmon`
+            };
         }
 
         const classList = [];
@@ -78,17 +89,21 @@ class App extends Component{
             classList.push(`red`);
         }
 
-        return <div className="App">
-            <h1>Yash's First React Code</h1>
-            <p className={ classList.join(` `) }>This is a paragraph written in JSX</p>
+        return (
+            <StyleRoot>
+                <div className="App">
+                    <h1>Yash's First React Code</h1>
+                    <p className={ classList.join(` `) }>This is a paragraph written in JSX</p>
 
-            <button style={ buttonStyle } onClick={() => this.switchNameHandler(`Yash`)}>Switch Names</button>
-            <button style={ buttonStyle } onClick={ this.togglePersonsHandler }>Toggle Persons</button>
+                    <button key="45asd" style={ buttonStyle } onClick={() => this.switchNameHandler(`Yash`)}>Switch Names</button>
+                    <button key="465dg" style={ buttonStyle } onClick={ this.togglePersonsHandler }>Toggle Persons</button>
 
-            { persons }
-        </div>
+                    { persons }
+                </div>
+            </StyleRoot>
+        );
     }
 }
 
 
-export default App;
+export default Radium(App);
