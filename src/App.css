@@ -9,3 +9,28 @@
 .bold{
     font-weight: bold;
 }
+
+
+.App > button{
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px solid #f00;
+    font-weight: 600;
+    font-size: 1.2em;
+    margin: 20px;
+    color: #fff;
+    background: #f00;
+    transition: all 0.25s;
+}
+
+.App > button:hover{
+    background: salmon;
+    transform: scale(1.05);
+}
+
+.App > button.clicked{
+    background: rgb(30, 185, 30);
+}
+.App > button.clicked:hover{
+    background: lightgreen;
+}
