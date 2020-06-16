@@ -1,7 +1,3 @@
-.App {
-  text-align: center;
-}
-
 .red{
     color: #f00;
 }
@@ -11,7 +7,7 @@
 }
 
 
-.App > button{
+.Cockpit > button{
     padding: 10px;
     border-radius: 3px;
     border: 1px solid #f00;
@@ -23,14 +19,14 @@
     transition: all 0.25s;
 }
 
-.App > button:hover{
+.Cockpit > button:hover{
     background: salmon;
     transform: scale(1.05);
 }
 
-.App > button.clicked{
+.Cockpit > button.clicked{
     background: rgb(30, 185, 30);
 }
-.App > button.clicked:hover{
+.Cockpit > button.clicked:hover{
     background: lightgreen;
 }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
-import Person from './Person/Person';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit'
+
 import styles from './App.css';
 
 
@@ -43,32 +45,21 @@ class App extends Component{
     }
 
     render = () => {
-        let persons = null,
-            appliedStyles = [];
-        if(this.state.showPersons){
-            persons = (
-                <div>
-                    { this.state.persons.map((person) => {
-                        return <Person
-                        name={ person.name }
-                        age={ person.age }
-                        key={ person.id }
-                        changeNameHandler={ (e) => { this.changeNameHandler(e.target.value, person.id) } }
-                        removeComponentHandler={ () => { this.removeComponentHandler(person.id) } }/>
-                    }) }
-                </div>
-            );
+        let persons = null;
 
-            appliedStyles.push(styles.clicked);
+        if(this.state.showPersons){
+            persons = <Persons
+                persons={ this.state.persons }
+                changeNameHandler={ this.changeNameHandler }
+                removeComponentHandler={ this.removeComponentHandler } />
         }
 
         return (
             <div className={ styles.App }>
-                <h1>Yash's First React Code</h1>
-                <p>This is a paragraph written in JSX</p>
-
-                <button className={ appliedStyles.join(` `) } key="45asd" onClick={() => this.switchNameHandler(`Yash`)}>Switch Names</button>
-                <button className={ appliedStyles.join(` `) } key="465dg" onClick={ this.togglePersonsHandler }>Toggle Persons</button>
+                <Cockpit
+                 showPersons={ this.state.showPersons }
+                 switchNameHandler={ this.switchNameHandler }
+                 togglePersonsHandler={ this.togglePersonsHandler } />
 
                 { persons }
             </div>
