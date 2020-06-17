@@ -11,8 +11,8 @@ class App extends Component{
     state = {
         persons: [
             { name: `Shaan`, age: 15, id: uuidv4() },
-            { name: `Sat`, age: 42, id: uuidv4() },
-            { name: `Usha`, age: 44, id: uuidv4() }
+            { name: `Usha`, age: 44, id: uuidv4() },
+            { name: `Sat`, age: 42, id: uuidv4() }
         ],
         showPersons: false,
         showCockpit: true
@@ -72,25 +72,40 @@ class App extends Component{
     }
 
     togglePersonsHandler = () => {
-        this.setState({ showPersons: !this.state.showPersons });
+        this.setState((prevState, props) => {
+            return { showPersons: !prevState.showPersons }
+        });
     }
 
     changeNameHandler = (name, id) => {
-        const persons = [ ...this.state.persons ];
-        const concernedPersonIdex = persons.findIndex((person) => person.id === id);
-        persons[concernedPersonIdex].name = name;
-        this.setState({ persons });
+        this.setState((prevState, props) => {
+            const { persons, concernedPersonIdex } = this.findPersonIndex(prevState, id);
+            persons[concernedPersonIdex].name = name;
+            
+            return { persons };
+        });
     }
 
     removeComponentHandler = (id) => {
-        const persons = [ ...this.state.persons ];
-        const concernedPersonIdex = persons.findIndex((person) => person.id === id);
-        persons.splice(concernedPersonIdex, 1);
-        this.setState({ persons });
+        this.setState((prevState, props) => {
+            const { persons, concernedPersonIdex } = this.findPersonIndex(prevState, id);
+            persons.splice(concernedPersonIdex, 1);
+            
+            return { persons };
+        });
     }
 
     toggleCockpitHandler = () => {
-        this.setState({ showCockpit: !this.state.showCockpit })
+        this.setState((prevState, props) => {
+            return { showCockpit: !prevState.showCockpit }
+        });
+    }
+
+    findPersonIndex = (state, id) => {
+        const persons = [ ...state.persons ];
+        const concernedPersonIdex = persons.findIndex((person) => person.id === id);
+
+        return { persons, concernedPersonIdex };
     }
 }
 
