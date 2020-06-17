@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { v4 as uuidv4 } from 'uuid/dist/index';
 
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit'
@@ -9,19 +10,63 @@ import styles from './App.css';
 class App extends Component{
     state = {
         persons: [
-            { id: `a9s87d`, name: `Shaan`, age: 15 },
-            { id: `8as9d2`, name: `Sat`, age: 42 },
-            { id: `as54ds`, name: `Usha`, age: 44 }
+            { name: `Shaan`, age: 15, id: uuidv4() },
+            { name: `Sat`, age: 42, id: uuidv4() },
+            { name: `Usha`, age: 44, id: uuidv4() }
         ],
-        showPersons: false
+        showPersons: false,
+        showCockpit: true
     }
 
-    switchNameHandler = (name) => {
+    static getDerivedStateFromProps = (props, state) => {
+        console.log(`[App.js] getDerivedStateFromProps`);
+        return null;
+    }
+
+    shouldComponentUpdate = (nextProps, nextState) => {
+        console.log(`[App.js] shouldComponentUpdate`);
+        return true;
+    }
+
+    componentDidMount = () => {
+        console.log(`[App.js] componentDidMount`);
+    }
+
+    render = () => {
+        console.log(`[App.js] render`);
+
+        let persons = null;
+        if(this.state.showPersons){
+            persons = <Persons
+                persons={ this.state.persons }
+                changeNameHandler={ this.changeNameHandler }
+                removeComponentHandler={ this.removeComponentHandler } />
+        }
+
+
+        return (
+            <div className={ styles.App }>
+                <Cockpit
+                 title={ this.props.appTitle }
+                 showPersons={ this.state.showPersons }
+                 switchNameHandler={ this.switchNameHandler }
+                 togglePersonsHandler={ this.togglePersonsHandler }
+                 toggleCockpit={ this.toggleCockpitHandler }
+                 showCockpit={ this.state.showCockpit } />
+
+                { persons }
+            </div>
+        );
+    }
+
+
+
+    switchNameHandler = () => {
         this.setState({
             persons: [
-                { name: name, age: 15 },
-                { name: `Sat`, age: 42 },
-                { name: `Usha`, age: 44 }
+                { name: `Yash`, age: 15, id: uuidv4() },
+                { name: `Sat`, age: 42, id: uuidv4() },
+                { name: `Usha`, age: 44, id: uuidv4() }
             ]
         });
     }
@@ -44,26 +89,8 @@ class App extends Component{
         this.setState({ persons });
     }
 
-    render = () => {
-        let persons = null;
-
-        if(this.state.showPersons){
-            persons = <Persons
-                persons={ this.state.persons }
-                changeNameHandler={ this.changeNameHandler }
-                removeComponentHandler={ this.removeComponentHandler } />
-        }
-
-        return (
-            <div className={ styles.App }>
-                <Cockpit
-                 showPersons={ this.state.showPersons }
-                 switchNameHandler={ this.switchNameHandler }
-                 togglePersonsHandler={ this.togglePersonsHandler } />
-
-                { persons }
-            </div>
-        );
+    toggleCockpitHandler = () => {
+        this.setState({ showCockpit: !this.state.showCockpit })
     }
 }
 

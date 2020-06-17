@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import styles from './Person.css';
 
-const Person = (props) => {
-    return (
-        <div className={ styles.Person }>
-            <p onClick={ props.click }>My name is { props.name } and I am { props.age } years old.</p>
-            <strong>{ props.children }</strong>
+class Person extends PureComponent{
+    render = () => {
+        console.log(`[Person.js] render`);
 
-            <input type="text" onChange={ props.changeNameHandler } value={ props.name }/>
+        return (
+            <div className={ styles.Person }>
+                <p>My name is { this.props.name } and I am { this.props.age } years old.</p>
+                <strong>{ this.props.children }</strong>
 
-            <button onClick={ props.removeComponentHandler }>Remove Person</button>
-        </div>
-    );
+                <input type="text" onChange={ this.props.changeNameHandler } value={ this.props.name }/>
+
+                <button onClick={ this.props.removeComponentHandler }>Remove Person</button>
+            </div>
+        );
+    }
 }
 
 export default Person;
