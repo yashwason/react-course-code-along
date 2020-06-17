@@ -1,5 +1,8 @@
 import React, { useEffect, Fragment } from 'react';
+import propTypes from 'prop-types';
+
 import styles from './Cockpit.css';
+
 
 const Cockpit = (props) => {
     const appliedStyles = [];
@@ -7,7 +10,6 @@ const Cockpit = (props) => {
     useEffect(() => {
         console.log(`[Cockpit.js] useEffect (render)`);
     }, [ props.showCockpit ]);
-
 
     if(props.showPersons) appliedStyles.push(styles.clicked);
 
@@ -30,5 +32,15 @@ const Cockpit = (props) => {
         </div>
     );
 };
+
+
+Cockpit.propTypes = {
+    showCockpit: propTypes.bool,
+    showPerson: propTypes.bool,
+    title: propTypes.string,
+    switchNameHandler: propTypes.func,
+    togglePersonsHandler: propTypes.func,
+    toggleCockpit: propTypes.func
+}
 
 export default Cockpit;

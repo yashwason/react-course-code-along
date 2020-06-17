@@ -1,5 +1,8 @@
 import React, { PureComponent } from 'react';
+import propTypes from 'prop-types';
+
 import styles from './Person.css';
+
 
 class Person extends PureComponent{
     render = () => {
@@ -8,7 +11,6 @@ class Person extends PureComponent{
         return (
             <div className={ styles.Person }>
                 <p>My name is { this.props.name } and I am { this.props.age } years old.</p>
-                <strong>{ this.props.children }</strong>
 
                 <input type="text" onChange={ this.props.changeNameHandler } value={ this.props.name }/>
 
@@ -17,5 +19,14 @@ class Person extends PureComponent{
         );
     }
 }
+
+
+Person.propTypes = {
+    name: propTypes.string,
+    age: propTypes.number,
+    changeNameHandler: propTypes.func,
+    removeComponentHandler: propTypes.func
+};
+
 
 export default Person;

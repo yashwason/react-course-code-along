@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { v4 as uuidv4 } from 'uuid/dist/index';
+import propTypes from 'prop-types';
+import { nanoid } from 'nanoid';
 
 import Persons from '../components/Persons/Persons';
-import Cockpit from '../components/Cockpit/Cockpit'
+import Cockpit from '../components/Cockpit/Cockpit';
 
 import styles from './App.css';
 
@@ -10,9 +11,9 @@ import styles from './App.css';
 class App extends Component{
     state = {
         persons: [
-            { name: `Shaan`, age: 15, id: uuidv4() },
-            { name: `Usha`, age: 44, id: uuidv4() },
-            { name: `Sat`, age: 42, id: uuidv4() }
+            { name: `Shaan`, age: 15, id: nanoid() },
+            { name: `Usha`, age: 44, id: nanoid() },
+            { name: `Sat`, age: 42, id: nanoid() }
         ],
         showPersons: false,
         showCockpit: true
@@ -64,9 +65,9 @@ class App extends Component{
     switchNameHandler = () => {
         this.setState({
             persons: [
-                { name: `Yash`, age: 15, id: uuidv4() },
-                { name: `Sat`, age: 42, id: uuidv4() },
-                { name: `Usha`, age: 44, id: uuidv4() }
+                { name: `Yash`, age: 15, id: nanoid() },
+                { name: `Sat`, age: 42, id: nanoid() },
+                { name: `Usha`, age: 44, id: nanoid() }
             ]
         });
     }
@@ -107,6 +108,11 @@ class App extends Component{
 
         return { persons, concernedPersonIdex };
     }
+}
+
+
+App.propTypes = {
+    appTitle: propTypes.string
 }
 
 
