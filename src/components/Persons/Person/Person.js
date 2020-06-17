@@ -22,10 +22,10 @@ class Person extends PureComponent{
 
 
 Person.propTypes = {
-    name: propTypes.string,
-    age: propTypes.number,
-    changeNameHandler: propTypes.func,
-    removeComponentHandler: propTypes.func
+    name: propTypes.string.isRequired,
+    age: propTypes.number.isRequired,
+    changeNameHandler: propTypes.func.isRequired,
+    removeComponentHandler: propTypes.func.isRequired
 };
 
 

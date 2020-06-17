@@ -112,7 +112,7 @@ class App extends Component{
 
 
 App.propTypes = {
-    appTitle: propTypes.string
+    appTitle: propTypes.string.isRequired
 }
 
 

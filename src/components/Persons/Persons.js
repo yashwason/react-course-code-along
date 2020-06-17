@@ -22,9 +22,9 @@ class Persons extends PureComponent{
 }
 
 Persons.propTypes = {
-    persons: propTypes.array,
-    changeNameHandler: propTypes.func,
-    removeComponentHandler: propTypes.func
+    persons: propTypes.array.isRequired,
+    changeNameHandler: propTypes.func.isRequired,
+    removeComponentHandler: propTypes.func.isRequired
 };
 
 export default Persons;

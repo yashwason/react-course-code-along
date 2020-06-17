@@ -35,12 +35,12 @@ const Cockpit = (props) => {
 
 
 Cockpit.propTypes = {
-    showCockpit: propTypes.bool,
-    showPerson: propTypes.bool,
-    title: propTypes.string,
-    switchNameHandler: propTypes.func,
-    togglePersonsHandler: propTypes.func,
-    toggleCockpit: propTypes.func
+    showCockpit: propTypes.bool.isRequired,
+    showPersons: propTypes.bool.isRequired,
+    title: propTypes.string.isRequired,
+    switchNameHandler: propTypes.func.isRequired,
+    togglePersonsHandler: propTypes.func.isRequired,
+    toggleCockpit: propTypes.func.isRequired
 }
 
 export default Cockpit;
