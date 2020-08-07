@@ -5,6 +5,8 @@ import { nanoid } from 'nanoid';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
+import AuthContext from '../context/auth';
+
 import styles from './App.css';
 
 
@@ -16,7 +18,8 @@ class App extends Component{
             { name: `Sat`, age: 42, id: nanoid() }
         ],
         showPersons: false,
-        showCockpit: true
+        showCockpit: true,
+        isAuthenticated: false
     }
 
     static getDerivedStateFromProps = (props, state) => {
@@ -44,23 +47,32 @@ class App extends Component{
                 removeComponentHandler={ this.removeComponentHandler } />
         }
 
-
         return (
-            <div className={ styles.App }>
-                <Cockpit
-                 title={ this.props.appTitle }
-                 showPersons={ this.state.showPersons }
-                 switchNameHandler={ this.switchNameHandler }
-                 togglePersonsHandler={ this.togglePersonsHandler }
-                 toggleCockpit={ this.toggleCockpitHandler }
-                 showCockpit={ this.state.showCockpit } />
+            <AuthContext.Provider value={{
+                isAuthenticated: this.state.isAuthenticated,
+                loginHandler: this.toggleAuthStatus
+            }}>
+                <div className={ styles.App }>
+                    <Cockpit
+                     title={ this.props.appTitle }
+                     showPersons={ this.state.showPersons }
+                     switchNameHandler={ this.switchNameHandler }
+                     togglePersonsHandler={ this.togglePersonsHandler }
+                     toggleCockpit={ this.toggleCockpitHandler }
+                     showCockpit={ this.state.showCockpit } />
 
-                { persons }
-            </div>
+                    { persons }
+                </div>
+            </AuthContext.Provider>
         );
     }
 
 
+    toggleAuthStatus = () => {
+        this.setState((prevState, props) => {
+            return { isAuthenticated: !prevState.isAuthenticated }
+        });
+    }
 
     switchNameHandler = () => {
         this.setState({

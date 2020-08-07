@@ -7,15 +7,17 @@ class Persons extends PureComponent{
     render = () => {
         console.log(`[Persons.js] render`);
 
-        return this.props.persons.map((person) => {
+        return this.props.persons.map((person, i) => {
             return (
                 <Person
-                name={ person.name }
-                age={ person.age }
-                key={ person.id }
-                id={ person.id }
-                changeNameHandler={ (e) => { this.props.changeNameHandler(e.target.value, person.id) } }
-                removeComponentHandler={ () => { this.props.removeComponentHandler(person.id) } } />
+                 name={ person.name }
+                 age={ person.age }
+                 key={ person.id }
+                 id={ person.id }
+                 changeNameHandler={ (e) => { this.props.changeNameHandler(e.target.value, person.id) } }
+                 removeComponentHandler={ () => { this.props.removeComponentHandler(person.id) } }
+                 toSetRef={ Boolean(i === 0) }
+                />
             );
         });
     }
